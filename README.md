@@ -14,13 +14,15 @@ If ofile is not given, the pipeline will print clustering labels in output.
 
 ## Citing
 
-   @inproceedings{d2023clique,
-  title={Clique-TF-IDF: A New Partitioning Framework Based on Dense Substructures},
-  author={D’Elia, Marco and Finocchi, Irene and Patrignani, Maurizio},
-  booktitle={International Conference of the Italian Association for Artificial Intelligence},
-  pages={396--410},
-  year={2023},
-  organization={Springer}
-}
+If you find Clique-TF-IDF useful in your research, please cite the following paper:
+
+    @inproceedings{d2023clique,
+    title={Clique-TF-IDF: A New Partitioning Framework Based on Dense Substructures},
+    author={D’Elia, Marco and Finocchi, Irene and Patrignani, Maurizio},
+    booktitle={International Conference of the Italian Association for Artificial Intelligence},
+    pages={396--410},
+    year={2023},
+    organization={Springer}
+    }
 
 
