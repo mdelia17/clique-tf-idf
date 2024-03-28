@@ -4,13 +4,13 @@ Implementation of Clique-TF-IDF graph clustering algorithm, as discussed in [Dâ€
 
 ## Usage
 
-To execute the pipeline, run:
+To run the pipeline, run:
 
-    python pipeline.py -f ifile [OPTIONAL -v -o ofile]
+    python pipeline.py -f ifile [OPTIONAL -v -o ofile -k blocks]
     python pipeline.py -f data/karate.edges -o data/output
 
-the graph in ifile has to be represented by a set of edges (see karate.edges for example) with vertexes ids from 1 to n. 
-If ofile is not given, the pipeline will print clustering labels in output.
+The graph in ifile has to be represented by a set of edges (see karate.edges for example) with vertexes ids from 1 to n. 
+If ofile is not given, the pipeline will print clustering labels in output. If k is invalid or not specified, the pipeline will find its best value.
 
 ## Citing
 
