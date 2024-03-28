@@ -1,6 +1,6 @@
 from cliques import find_cliques
 from matrix import createVertexCommunityMatrix
-from clustering import bestModelBinarySearch
+from clustering import bestModelBinarySearch, agglomerativeClustering
 
 import argparse
 import time
@@ -30,12 +30,14 @@ parser.add_argument('--verbose', '-v',
                     action='store_true')
 parser.add_argument('--output', '-o',
                     help='Name of output file for clusters')
+parser.add_argument('--blocks','-k', help='Number of blocks and hence clusters of the partition (if unspecified or not valid it will be automatically determined)')
 
 args = parser.parse_args()
 ifile = args.file
 comms_file = args.file.replace('edges','comms')
 verbose = args.verbose
 ofile = args.output
+blocks = args.blocks
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
@@ -74,12 +76,33 @@ end_t5 = time.time()
 if verbose:
     print('\tTime to find distance matrix: \033[1m{0:.2f} s\033[0m'.format(end_t5-start_t5))
 
-start_t6 = time.time()
-best_k, best_clustering_labels, best_modularity = bestModelBinarySearch(
-    D, G, (1,D.shape[0]//2), vertex_set, resolution=1, verbose=False)
-end_t6 = time.time()
-if verbose:
-    print('\tTime to find best clustering: \033[1m{0:.2f} s\033[0m'.format(end_t6-start_t6))
+if blocks != None:
+    try:
+        k = int(blocks)
+        if k > num_of_vertexes:
+            print("Number of clusters is greater than the number of vertices: Searching for the best k...")
+            auto = True
+        else:
+            auto = False
+    except ValueError:
+        print("Number of clusters is not valid. Searching for the best k...")
+        auto = True
+else:
+    auto = True
+    
+if auto:
+    start_t6 = time.time()
+    best_k, best_clustering_labels, best_modularity = bestModelBinarySearch(
+        D, G, (1,D.shape[0]//2), vertex_set, resolution=1, verbose=False)
+    end_t6 = time.time()
+    if verbose:
+        print('\tTime to find best clustering: \033[1m{0:.2f} s\033[0m'.format(end_t6-start_t6))
+else:
+    start_t6 = time.time()
+    best_clustering_labels = agglomerativeClustering(D, n_clusters=k, metric='precomputed', linkage='average')
+    end_t6 = time.time()
+    if verbose:
+        print('\tTime to find best k-clustering: \033[1m{0:.2f} s\033[0m'.format(end_t6-start_t6))
 
 t_total = (end_t1-start_t1) + (end_t2-start_t2) + (end_t3-start_t3) + (end_t5-start_t5) + (end_t6-start_t6)
 if verbose:
