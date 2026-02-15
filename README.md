@@ -1,6 +1,10 @@
 # Clique-TF-IDF
 
-Implementation of Clique-TF-IDF graph clustering algorithm, as discussed in [D’Elia, M., Finocchi, I., Patrignani, M. (2023). Clique-TF-IDF: A New Partitioning Framework Based on Dense Substructures. AIxIA 2023 – Advances in Artificial Intelligence. AIxIA 2023. Lecture Notes in Computer Science(), vol 14318. Springer](https://link.springer.com/chapter/10.1007/978-3-031-47546-7_27)
+Implementation of Clique-TF-IDF graph partitioning algorithm, as discussed in [D’Elia, M., Finocchi, I., Patrignani, M. (2023). Clique-TF-IDF: A New Partitioning Framework Based on Dense Substructures. AIxIA 2023 – Advances in Artificial Intelligence. AIxIA 2023. Lecture Notes in Computer Science(), vol 14318. Springer](https://link.springer.com/chapter/10.1007/978-3-031-47546-7_27)
+
+## Description
+
+The algorithm computes a partitioning of the input graph with a number of blocks (communities) either fixed to a specified value k or automatically determined by the program. It enumerates maximal cliques and uses them to calculate an embedding of vertices in a multidimensional space using a TF-IDF-like approach, then computes the partitioning through clustering algorithms. The embedding procedure can also be used independently as an alternative to traditional embedding approaches.
 
 ## Usage
 
